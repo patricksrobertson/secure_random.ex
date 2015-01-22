@@ -1,7 +1,7 @@
 defmodule SecureRandom do
   @moduledoc """
   Takes my favorite hits from Ruby's SecureRandom and brings em to elixir.
-  Mostly a convienance wrapper around Erlangs Crypo library, converting 
+  Mostly a convienance wrapper around Erlangs Crypto library, converting 
   Crypto.strong_rand_bytes/1 into a string.
 
   ## Examples
