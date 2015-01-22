@@ -12,6 +12,9 @@ defmodule SecureRandom do
       iex> SecureRandom.urlsafe_base64(4)
       "pLSVJw"
 
+      iex> SecureRandom.uuid
+      "a18e8302-c417-076d-196a-71dfbd5b1e03"
+
   """
  
   @default_length 16
