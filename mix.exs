@@ -7,11 +7,7 @@ defmodule SecureRandom.Mixfile do
      elixir: "~> 1.0",
      deps: deps,
      description: "A convienance library based on Ruy's SecureRandom",
-     licesences: "Apache 2.0",
-     contributors: "Patrick Robertson",
-     name: "SecureRandom.ex",
-     source_url: "https://github.com/patricksrobertson/secure_random.ex",
-     homepage_url: "https://github.com/patricksrobertson/secure_random.ex"
+     package: package
     ]
   end
 
@@ -20,6 +16,12 @@ defmodule SecureRandom.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [applications: [:logger]]
+  end
+
+  defp package do
+    [contributors: ["Patrick Robertson"],
+     licenses: ["Apache 2.0"],
+     links: %{github: "https://github.com/patricksrobertson/secure_random.ex"}]
   end
 
   # Dependencies can be Hex packages:
