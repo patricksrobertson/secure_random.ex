@@ -1,4 +1,6 @@
 defmodule SecureRandom do
+  use Bitwise
+
   @moduledoc """
   Takes my favorite hits from Ruby's SecureRandom and brings em to elixir.
   Mostly a convienance wrapper around Erlangs Crypto library, converting 
@@ -35,6 +37,35 @@ defmodule SecureRandom do
     random_bytes(n)
     |> :base64.encode_to_string
     |> to_string
+  end
+
+  defp bytes_to_int(bytes, result \\ 0) do
+    case bytes do
+      <<>>              -> result
+      <<x>>             -> (result <<< 8) + x
+      <<x, xs::binary>> -> bytes_to_int(xs, (result <<< 8) + x)
+    end
+  end
+
+  @doc """
+  Generates a random hexadecimal string.
+
+  The argument n specifies the length, in bytes, of the random number to be generated. The length of the resulting hexadecimal string is twice n.
+
+  If n is not specified, 16 is assumed. It may be larger in future.
+
+  The result may contain 0-9 and a-f.
+
+  ## Examples
+
+      iex> SecureRandom.hex(6)
+      "34fb5655a231"
+  """
+  def hex(n \\ @default_length) do
+    random_bytes(n)
+    |> bytes_to_int
+    |> Integer.to_string(16)
+    |> String.downcase
   end
  
   @doc """
