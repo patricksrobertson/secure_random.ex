@@ -39,11 +39,10 @@ defmodule SecureRandom do
     |> to_string
   end
 
-  defp bytes_to_int(bytes, result \\ 0) do
+  defp bytes_to_int(bytes) do
     case bytes do
-      <<>>              -> result
-      <<x>>             -> (result <<< 8) + x
-      <<x, xs::binary>> -> bytes_to_int(xs, (result <<< 8) + x)
+      <<x>>             -> x
+      <<x, xs::binary>> -> (bytes_to_int(xs) <<< 8) + x
     end
   end
 
