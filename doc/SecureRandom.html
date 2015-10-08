@@ -43,7 +43,7 @@
       
         <section id="moduledoc" class="docstring">
           <p>Takes my favorite hits from Ruby’s SecureRandom and brings em to elixir.
-Mostly a convienance wrapper around Erlangs Crypo library, converting 
+Mostly a convienance wrapper around Erlangs Crypto library, converting 
 Crypto.strong_rand_bytes/1 into a string.</p>
 <h2>Examples</h2>
 <pre><code>iex&gt; SecureRandom.base64
@@ -67,6 +67,13 @@ iex&gt; SecureRandom.uuid
   <td class="summary_signature"><a href="#base64/1">base64(n \\ 16)</a></td>
   
     <td class="summary_synopsis"><p>Returns random Base64 encoded string</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#hex/1">hex(n \\ 16)</a></td>
+  
+    <td class="summary_synopsis"><p>Generates a random hexadecimal string</p>
 </td>
   
 </tr>
@@ -118,6 +125,28 @@ iex&gt; SecureRandom.uuid
 
 iex&gt; SecureRandom.base64(8)
 &quot;2yDtUyQ5Xws=&quot;</code></pre>
+
+  </section>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="hex/1">
+    <span class="signature"><strong>hex(n \\ 16)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#hex/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+  <section class="docstring">
+    <p>Generates a random hexadecimal string.</p>
+<p>The argument n specifies the length, in bytes, of the random number to be generated. The length of the resulting hexadecimal string is twice n.</p>
+<p>If n is not specified, 16 is assumed. It may be larger in future.</p>
+<p>The result may contain 0-9 and a-f.</p>
+<h2>Examples</h2>
+<pre><code>iex&gt; SecureRandom.hex(6)
+&quot;34fb5655a231&quot;</code></pre>
 
   </section>
   
