@@ -19,7 +19,7 @@ Will accept PR's to flesh out further.
 Add this to your mix.exs:
 ```elixir
 defp deps do
-  [{:secure_random, "~> 0.4"}]
+  [{:secure_random, "~> 0.5"}]
 end
 ```
 
