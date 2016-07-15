@@ -3,7 +3,7 @@ defmodule SecureRandom do
 
   @moduledoc """
   Takes my favorite hits from Ruby's SecureRandom and brings em to elixir.
-  Mostly a convienance wrapper around Erlangs Crypto library, converting 
+  Mostly a convienance wrapper around Erlangs Crypto library, converting
   Crypto.strong_rand_bytes/1 into a string.
 
   ## Examples
@@ -18,14 +18,14 @@ defmodule SecureRandom do
       "a18e8302-c417-076d-196a-71dfbd5b1e03"
 
   """
- 
+
   @default_length 16
- 
+
   @doc """
   Returns random Base64 encoded string.
 
   ## Examples
-    
+
       iex> SecureRandom.base64
       "rm/JfqH8Y+Jd7m5SHTHJoA=="
 
@@ -35,15 +35,7 @@ defmodule SecureRandom do
   """
   def base64(n \\ @default_length) do
     random_bytes(n)
-    |> :base64.encode_to_string
-    |> to_string
-  end
-
-  defp bytes_to_int(bytes) do
-    case bytes do
-      <<x>>             -> x
-      <<x, xs::binary>> -> (bytes_to_int(xs) <<< 8) + x
-    end
+    |> Base.encode64(case: :lower)
   end
 
   @doc """
@@ -62,11 +54,9 @@ defmodule SecureRandom do
   """
   def hex(n \\ @default_length) do
     random_bytes(n)
-    |> bytes_to_int
-    |> Integer.to_string(16)
-    |> String.downcase
+    |> Base.encode16(case: :lower)
   end
- 
+
   @doc """
   Returns random urlsafe Base64 encoded string.
 
@@ -96,14 +86,14 @@ defmodule SecureRandom do
   """
   def uuid do
     bytes = random_bytes |> :erlang.bitstring_to_list
-    :io_lib.format("~2.16.0b~2.16.0b~2.16.0b~2.16.0b-~2.16.0b~2.16.0b-~2.16.0b~2.16.0b-~2.16.0b~2.16.0b-~2.16.0b~2.16.0b~2.16.0b~2.16.0b~2.16.0b~2.16.0b", bytes) 
+    :io_lib.format("~2.16.0b~2.16.0b~2.16.0b~2.16.0b-~2.16.0b~2.16.0b-~2.16.0b~2.16.0b-~2.16.0b~2.16.0b-~2.16.0b~2.16.0b~2.16.0b~2.16.0b~2.16.0b~2.16.0b", bytes)
     |> to_string
   end
- 
- 
+
+
   @doc """
   Returns random bytes.
-  
+
   ## Examples
 
       iex> SecureRandom.random_bytes
