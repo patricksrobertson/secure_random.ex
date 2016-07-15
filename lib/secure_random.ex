@@ -71,9 +71,7 @@ defmodule SecureRandom do
   """
   def urlsafe_base64(n \\ @default_length) do
     base64(n)
-    |> String.replace(~r/[\n\=]/, "")
-    |> String.replace(~r/\+/, "-")
-    |> String.replace(~r/\//, "_")
+    |> Base.url_encode64(case: :lower, padding: true)
   end
 
   @doc """

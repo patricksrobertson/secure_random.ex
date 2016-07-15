@@ -28,12 +28,11 @@ defmodule SecureRandomTest do
   end
 
   test "urlsafe_base64/1 defaults to a string length of 22" do
-    # length * 33% - 2 bits for the ==
-    assert 22 == String.length(SecureRandom.urlsafe_base64)
+    assert 32 == String.length(SecureRandom.urlsafe_base64)
   end
 
   test "urlsafe_base64/1 takes a byte_length" do
-    assert 6 == String.length(SecureRandom.urlsafe_base64(4))
+    assert 12 == String.length(SecureRandom.urlsafe_base64(4))
   end
 
   test "uuid/0 returns a Binary string" do
