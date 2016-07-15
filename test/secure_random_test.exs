@@ -41,6 +41,6 @@ defmodule SecureRandomTest do
 
   test "uuid/0 represents the UUIDv4 standard" do
     # that standard is 128 bit string 4byte-2byte-2byte-2byte-6byte
-    assert Regex.match?(~r/\A\w{8}-\w{4}-\w{4}-\w{4}-\w{12}\z/, SecureRandom.uuid)
+    assert Regex.match?(~r/\A\w{8}-\w{4}-4\w{3}-(8|9|a|b)\w{3}-\w{12}\z/, SecureRandom.uuid)
   end
 end
