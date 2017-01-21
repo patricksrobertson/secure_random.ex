@@ -5,9 +5,9 @@ defmodule SecureRandom.Mixfile do
     [app: :secure_random,
      version: "0.5.0",
      elixir: "~> 1.2",
-     deps: deps,
+     deps: deps(),
      description: "A convienance library based on Ruby's SecureRandom",
-     package: package
+     package: package()
     ]
   end
 

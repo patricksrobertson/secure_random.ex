@@ -83,7 +83,7 @@ defmodule SecureRandom do
     "e1d87f6e-fbd5-6801-9528-a1d568c1fd02"
   """
   def uuid do
-    bigenerate |> encode
+    bigenerate() |> encode
   end
 
   @doc """
