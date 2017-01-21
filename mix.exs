@@ -3,7 +3,7 @@ defmodule SecureRandom.Mixfile do
 
   def project do
     [app: :secure_random,
-     version: "0.5.0",
+     version: "0.5.1",
      elixir: "~> 1.2",
      deps: deps(),
      description: "A convienance library based on Ruby's SecureRandom",
