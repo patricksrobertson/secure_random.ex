@@ -22,6 +22,24 @@ defmodule SecureRandom do
   @default_length 16
 
   @doc """
+  Returns random Base58 encoded string.
+
+  ## Examples
+
+      iex> SecureRandom.base58
+      "Y5oZt858wSQbnGrxAZTyrY"
+
+      iex> SecureRandom.base58(8)
+      "4xxSsC4PKq5"
+
+  """
+  def base58(n \\ @default_length) do
+    random_bytes(n)
+    |> :base58.binary_to_base58()
+    |> List.to_string()
+  end
+
+  @doc """
   Returns random Base64 encoded string.
 
   ## Examples
@@ -108,11 +126,9 @@ defmodule SecureRandom do
   end
 
   defp encode(<<u0::32, u1::16, u2::16, u3::16, u4::48>>) do
-    hex_pad(u0, 8) <> "-" <>
-    hex_pad(u1, 4) <> "-" <>
-    hex_pad(u2, 4) <> "-" <>
-    hex_pad(u3, 4) <> "-" <>
-    hex_pad(u4, 12)
+    hex_pad(u0, 8) <>
+      "-" <>
+      hex_pad(u1, 4) <> "-" <> hex_pad(u2, 4) <> "-" <> hex_pad(u3, 4) <> "-" <> hex_pad(u4, 12)
   end
 
   defp hex_pad(hex, count) do
@@ -122,8 +138,10 @@ defmodule SecureRandom do
 
   defp lower(<<h, t::binary>>, acc) when h in ?A..?F,
     do: lower(t, acc <> <<h + 32>>)
+
   defp lower(<<h, t::binary>>, acc),
     do: lower(t, acc <> <<h>>)
+
   defp lower(<<>>, acc),
     do: acc
 end
