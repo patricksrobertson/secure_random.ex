@@ -35,8 +35,8 @@ defmodule SecureRandom do
   """
   def base58(n \\ @default_length) do
     random_bytes(n)
-    |> :base58.binary_to_base58()
-    |> List.to_string()
+    |> :binary.bin_to_list()
+    |> charlist_to_base58()
   end
 
   @doc """
@@ -144,4 +144,17 @@ defmodule SecureRandom do
 
   defp lower(<<>>, acc),
     do: acc
+
+  defp int_to_base58(x) when x >= 58,
+    do: Base58.b58char(:rand.uniform(57))
+
+  defp int_to_base58(x),
+    do: Base58.b58char(x)
+
+  defp charlist_to_base58(chars) do
+    chars
+    |> Enum.map(&rem(&1, 64))
+    |> Enum.map(&int_to_base58(&1))
+    |> List.to_string()
+  end
 end
