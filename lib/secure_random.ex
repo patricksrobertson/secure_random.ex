@@ -22,6 +22,24 @@ defmodule SecureRandom do
   @default_length 16
 
   @doc """
+  Returns random Base58 encoded string.
+
+  ## Examples
+
+      iex> SecureRandom.base58
+      "Y5oZt858wSQbnGrxAZTyrY"
+
+      iex> SecureRandom.base58(8)
+      "4xxSsC4PKq5"
+
+  """
+  def base58(n \\ @default_length) do
+    random_bytes(n)
+    |> :binary.bin_to_list()
+    |> charlist_to_base58()
+  end
+
+  @doc """
   Returns random Base64 encoded string.
 
   ## Examples
@@ -108,11 +126,9 @@ defmodule SecureRandom do
   end
 
   defp encode(<<u0::32, u1::16, u2::16, u3::16, u4::48>>) do
-    hex_pad(u0, 8) <> "-" <>
-    hex_pad(u1, 4) <> "-" <>
-    hex_pad(u2, 4) <> "-" <>
-    hex_pad(u3, 4) <> "-" <>
-    hex_pad(u4, 12)
+    hex_pad(u0, 8) <>
+      "-" <>
+      hex_pad(u1, 4) <> "-" <> hex_pad(u2, 4) <> "-" <> hex_pad(u3, 4) <> "-" <> hex_pad(u4, 12)
   end
 
   defp hex_pad(hex, count) do
@@ -122,8 +138,23 @@ defmodule SecureRandom do
 
   defp lower(<<h, t::binary>>, acc) when h in ?A..?F,
     do: lower(t, acc <> <<h + 32>>)
+
   defp lower(<<h, t::binary>>, acc),
     do: lower(t, acc <> <<h>>)
+
   defp lower(<<>>, acc),
     do: acc
+
+  defp int_to_base58(x) when x >= 58,
+    do: Base58.b58char(:rand.uniform(57))
+
+  defp int_to_base58(x),
+    do: Base58.b58char(x)
+
+  defp charlist_to_base58(chars) do
+    chars
+    |> Enum.map(&rem(&1, 64))
+    |> Enum.map(&int_to_base58(&1))
+    |> List.to_string()
+  end
 end
