@@ -1,4 +1,5 @@
 defmodule Base58 do
+  @moduledoc false
   def b58char(0), do: ?1
   def b58char(1), do: ?2
   def b58char(2), do: ?3
