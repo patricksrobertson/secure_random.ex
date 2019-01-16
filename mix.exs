@@ -29,8 +29,8 @@ defmodule SecureRandom.Mixfile do
 
   def deps do
     [
-      {:earmark, "~> 0.1", only: :dev},
-      {:ex_doc, "~> 0.11", only: :dev}
+      {:earmark, "~> 1.3.1", only: :dev},
+      {:ex_doc, "~> 0.19.2", only: :dev}
     ]
   end
 end
