@@ -14,6 +14,18 @@ defmodule SecureRandomTest do
     assert 4 == byte_size(SecureRandom.base64(3))
   end
 
+  test "base58/1 returns a Binary string" do
+    assert is_binary(SecureRandom.base58)
+  end
+
+  test "base58/1 defaults to a byte size of 16" do
+    assert 16 == byte_size(SecureRandom.base58)
+  end
+
+  test "base58/1 successfully takes a byte_length" do
+    assert 24 == byte_size(SecureRandom.base58(24))
+  end
+
   test "hex/1 defaults to a byte size of 16" do
     # The byte size of the resulting string is twice as large
     assert 32 == byte_size(SecureRandom.hex)
