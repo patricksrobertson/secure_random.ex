@@ -70,7 +70,7 @@ defmodule SecureRandom do
 
   """
   def urlsafe_base64(n \\ @default_length) do
-    base64(n)
+    random_bytes(n)
     |> Base.url_encode64(case: :lower, padding: true)
   end
 
