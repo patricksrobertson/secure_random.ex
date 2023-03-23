@@ -1,6 +1,4 @@
 defmodule SecureRandom do
-  use Bitwise
-
   @moduledoc """
   Takes my favorite hits from Ruby's SecureRandom and brings em to elixir.
   Mostly a convienance wrapper around Erlangs Crypto library, converting
